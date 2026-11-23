@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Unseen Beneath the Clear Night Sky - MySpace Inspired Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        night: {
+                            deep: '#060713',
+                            bg: '#090a16',
+                            card: 'rgba(19, 17, 44, 0.65)',
+                            border: 'rgba(226, 232, 240, 0.12)',
+                            moonlight: '#e2e8f0',
+                            accent: '#ec4899', // Romantic Rose / Starlight Magenta
+                            cyan: '#38bdf8',   // Soft Icy Blue
+                            violet: '#a855f7',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    boxShadow: {
+                        'glow-accent': '0 0 25px rgba(236, 72, 153, 0.35)',
+                        'glow-moon': '0 0 20px rgba(226, 232, 240, 0.2)',
+                        'glow-cyan': '0 0 25px rgba(56, 189, 248, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #060713;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Styling */
+        .glass-card {
+            background: rgba(19, 17, 44, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(226, 232, 240, 0.12);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(236, 72, 153, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(236, 72, 153, 0.25);
+        }
+
+        .glass-nav {
+            background: rgba(6, 7, 19, 0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.08);
+        }
+
+        /* Text Gradients */
+        .text-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 40%, #ec4899 75%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-rose-gradient {
+            background: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Canvas Background */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060713;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e1b4b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ec4899;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-night-accent selection:text-white">
+
+    <!-- Interactive Canvas Background (Stars, Nebulae, Meteors) -->
+    <canvas id="starfield"></canvas>
+
+    <!-- Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-night-accent via-night-violet to-night-cyan p-[1px] flex items-center justify-center transition-transform group-hover:scale-105">
+                    <div class="w-full h-full bg-night-bg rounded-full flex items-center justify-center">
+                        <i data-lucide="moon-star" class="w-5 h-5 text-night-accent"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif font-bold text-lg tracking-wide text-white group-hover:text-night-accent transition-colors">Love Unseen</span>
+                    <span class="text-[10px] tracking-widest uppercase text-slate-400">Beneath Clear Night Sky</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Menu -->
+            <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-night-accent transition-colors flex items-center gap-1.5"><i data-lucide="user" class="w-4 h-4"></i> Profil</a>
+                <a href="#music-section" class="hover:text-night-accent transition-colors flex items-center gap-1.5"><i data-lucide="disc" class="w-4 h-4"></i> Musik</a>
+                <a href="#skills" class="hover:text-night-accent transition-colors flex items-center gap-1.5"><i data-lucide="sparkles" class="w-4 h-4"></i> Keahlian</a>
+                <a href="#projects" class="hover:text-night-accent transition-colors flex items-center gap-1.5"><i data-lucide="folder-git-2" class="w-4 h-4"></i> Portofolio</a>
+                <a href="#guestbook" class="hover:text-night-accent transition-colors flex items-center gap-1.5"><i data-lucide="message-square" class="w-4 h-4"></i> Guestbook</a>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-night-accent via-night-violet to-night-cyan text-white font-semibold text-xs tracking-wider uppercase hover:shadow-glow-accent transition-all duration-300 transform hover:-translate-y-0.5">Kontak</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden p-2 text-slate-300 hover:text-white focus:outline-none" aria-label="Toggle Menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-x-0 border-t-0 px-6 py-6 space-y-4">
+            <a href="#about" class="mobile-link block text-slate-300 hover:text-night-accent transition-colors py-2"><i data-lucide="user" class="inline w-4 h-4 mr-2"></i> Profil</a>
+            <a href="#music-section" class="mobile-link block text-slate-300 hover:text-night-accent transition-colors py-2"><i data-lucide="disc" class="inline w-4 h-4 mr-2"></i> Musik Profile</a>
+            <a href="#skills" class="mobile-link block text-slate-300 hover:text-night-accent transition-colors py-2"><i data-lucide="sparkles" class="inline w-4 h-4 mr-2"></i> Keahlian</a>
+            <a href="#projects" class="mobile-link block text-slate-300 hover:text-night-accent transition-colors py-2"><i data-lucide="folder-git-2" class="inline w-4 h-4 mr-2"></i> Portofolio Showcase</a>
+            <a href="#guestbook" class="mobile-link block text-slate-300 hover:text-night-accent transition-colors py-2"><i data-lucide="message-square" class="inline w-4 h-4 mr-2"></i> Papan Pesan / Guestbook</a>
+            <a href="#contact" class="mobile-link block text-center px-5 py-3 rounded-xl bg-gradient-to-r from-night-accent via-night-violet to-night-cyan text-white font-semibold text-sm uppercase">Kirim Pesan</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-24 pb-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+
+        <!-- MySpace Profile Layout Container -->
+        <section id="about" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start pt-6">
+            
+            <!-- Left Column: Profile Card & Music Player Widget -->
+            <div class="lg:col-span-4 space-y-6">
+                
+                <!-- MySpace Profile Card -->
+                <div class="glass-card rounded-3xl p-6 relative overflow-hidden border border-white/10 shadow-glow-moon text-center">
+                    <div class="absolute top-0 left-0 right-0 h-24 bg-gradient-to-r from-indigo-950 via-purple-950 to-slate-950 opacity-80"></div>
+                    
+                    <!-- Avatar Photo -->
+                    <div class="relative z-10 mt-6 flex justify-center">
+                        <div class="relative group">
+                            <div class="absolute -inset-1.5 bg-gradient-to-r from-night-accent via-night-violet to-night-cyan rounded-full blur-md opacity-70 group-hover:opacity-100 transition duration-500"></div>
+                            <div class="w-32 h-32 rounded-full bg-slate-900 border-2 border-white/30 flex items-center justify-center overflow-hidden relative">
+                                <i data-lucide="user-check" class="w-16 h-16 text-night-accent animate-pulse"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Info -->
+                    <div class="mt-4 space-y-2 relative z-10">
+                        <h2 class="text-2xl font-serif font-bold text-white">Alex "Starlight" Creative</h2>
+                        <p class="text-xs text-night-accent font-mono">UI/UX Designer & Creative Developer</p>
+                        <p class="text-xs text-slate-400 italic">"Menulis kode dan merancang visual dalam dekapan keheningan malam."</p>
+                    </div>
+
+                    <!-- MySpace Status Badges -->
+                    <div class="mt-6 pt-4 border-t border-white/10 text-xs space-y-2.5 text-left">
+                        <div class="flex items-center gap-2 text-slate-300">
+                            <i data-lucide="activity" class="w-4 h-4 text-night-accent"></i>
+                            <span class="font-semibold text-white">Status:</span>
+                            <span class="text-slate-400">Mengamati Bintang & Mengembangkan Karya</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-slate-300">
+                            <i data-lucide="smile" class="w-4 h-4 text-night-cyan"></i>
+                            <span class="font-semibold text-white">Suasana Hati:</span>
+                            <span class="text-slate-400">Syahdu & Terinspirasi ✨</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-slate-300">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-night-violet"></i>
+                            <span class="font-semibold text-white">Lokasi:</span>
+                            <span class="text-slate-400">Di Bawah Langit Malam Jernih</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Music Player Widget ("Midnight Soundtrack") -->
+                <div id="music-section" class="glass-card rounded-3xl p-6 border border-night-accent/30 shadow-glow-accent space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="disc" class="w-5 h-5 text-night-accent animate-spin" style="animation-duration: 8s;"></i>
+                            <span class="text-xs font-semibold uppercase tracking-wider text-white">Midnight Soundtrack</span>
+                        </div>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-night-accent/20 text-night-accent font-mono">MySpace Player</span>
+                    </div>
+
+                    <div class="flex items-center gap-4 bg-night-bg/80 p-3 rounded-2xl border border-white/5">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-night-accent to-night-cyan flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="music" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p class="text-xs font-bold text-white truncate">Love Unseen Beneath the Clear Night Sky</p>
+                            <p class="text-[10px] text-slate-400 truncate">Starlight Serenade (Ambient Instrumental)</p>
+                        </div>
+                    </div>
+
+                    <!-- Player Controls -->
+                    <div class="space-y-2">
+                        <div class="w-full bg-white/10 rounded-full h-1.5 cursor-pointer overflow-hidden" id="progress-bar-container">
+                            <div id="progress-bar" class="bg-gradient-to-r from-night-accent to-night-cyan h-full w-1/3 transition-all"></div>
+                        </div>
+                        <div class="flex justify-between text-[10px] text-slate-400 font-mono">
+                            <span id="current-time">01:15</span>
+                            <span>03:45</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-6 pt-1">
+                        <button class="text-slate-400 hover:text-white transition"><i data-lucide="skip-back" class="w-4 h-4"></i></button>
+                        <button id="play-pause-btn" class="w-10 h-10 rounded-full bg-gradient-to-r from-night-accent to-night-violet flex items-center justify-center text-white shadow-glow-accent hover:scale-105 transition">
+                            <i id="play-icon" data-lucide="play" class="w-5 h-5"></i>
+                        </button>
+                        <button class="text-slate-400 hover:text-white transition"><i data-lucide="skip-forward" class="w-4 h-4"></i></button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: MySpace Bio & Vision Banner -->
+            <div class="lg:col-span-8 space-y-8">
+                
+                <!-- Hero Header Banner -->
+                <div class="glass-card rounded-3xl p-8 sm:p-10 border border-white/10 relative overflow-hidden">
+                    <div class="absolute -right-16 -bottom-16 w-64 h-64 rounded-full bg-night-accent/10 blur-3xl pointer-events-none"></div>
+                    
+                    <div class="space-y-6 relative z-10">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-white/10 text-xs text-night-accent font-medium">
+                            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                            <span>Love Unseen Beneath the Clear Night Sky</span>
+                        </div>
+
+                        <h1 class="text-3xl sm:text-5xl font-serif font-bold text-white leading-tight">
+                            Selamat Datang di Portofolio <br/>
+                            <span class="text-gradient">Ruang Malam Digital</span>
+                        </h1>
+
+                        <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                            Di balik keheningan malam yang jernih, ide-ide kreatif tumbuh dengan bebas. Saya mengombinasikan desain antarmuka yang puitis dan pengembangan kode modern untuk menghadirkan pengalaman web yang berkesan.
+                        </p>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4">
+                            <div class="glass-card p-4 rounded-2xl text-center border border-white/5">
+                                <span class="block text-2xl font-bold text-gradient">4+</span>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider">Tahun Pengalaman</span>
+                            </div>
+                            <div class="glass-card p-4 rounded-2xl text-center border border-white/5">
+                                <span class="block text-2xl font-bold text-gradient">30+</span>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider">Proyek Selesai</span>
+                            </div>
+                            <div class="glass-card p-4 rounded-2xl text-center border border-white/5">
+                                <span class="block text-2xl font-bold text-gradient">100%</span>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider">Kreativitas Malam</span>
+                            </div>
+                            <div class="glass-card p-4 rounded-2xl text-center border border-white/5">
+                                <span class="block text-2xl font-bold text-gradient">∞</span>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider">Inspirasi Langit</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bio Narrative / Tentang Saya -->
+                <div class="glass-card rounded-3xl p-8 border border-white/10 space-y-4">
+                    <h3 class="text-xl font-serif font-bold text-white flex items-center gap-2">
+                        <i data-lucide="book-open" class="w-5 h-5 text-night-accent"></i>
+                        <span>Tentang Saya & Visi Kreatif</span>
+                    </h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Seperti namanya—<strong class="text-white">Love Unseen Beneath the Clear Night Sky</strong>—setiap detail yang disajikan dalam portofolio ini adalah perwujudan dedikasi yang tak selalu terlihat di permukaan, namun dirasakan manfaatnya melalui interaksi pengguna yang mulus.
+                    </p>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Spesialisasi saya berada pada persimpangan antara <span class="text-night-accent">Frontend Craftsmanship</span> dan <span class="text-night-cyan">UI/UX Design</span>. Saya percaya bahwa situs web bukan sekadar tampilan digital, melainkan medium penyampaian rasa dan cerita.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Keahlian / Skills Section -->
+        <section id="skills" class="space-y-8 pt-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="text-night-accent text-xs font-semibold uppercase tracking-widest">Spesialisasi Utama</span>
+                <h2 class="text-3xl font-serif font-bold text-white">Keahlian & Perangkat Kreatif</h2>
+                <p class="text-slate-400 text-sm">Kemampuan teknis dan ranah seni digital yang saya kuasai.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card p-6 rounded-3xl space-y-4 border border-white/10 transition-all hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-night-accent/20 flex items-center justify-center text-night-accent border border-night-accent/40">
+                        <i data-lucide="code" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Front-End Dev</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Membangun website responsif, cepat, dan rapi menggunakan HTML5, Tailwind CSS, dan JavaScript modern.</p>
+                    <div class="w-full bg-white/10 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-night-accent h-full w-[92%]"></div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl space-y-4 border border-white/10 transition-all hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-night-cyan/20 flex items-center justify-center text-night-cyan border border-night-cyan/40">
+                        <i data-lucide="layout" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">UI/UX Artistry</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Merancang antarmuka bertema gelap/gelap-romantis dengan wireframe, prototyping, dan design system.</p>
+                    <div class="w-full bg-white/10 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-night-cyan h-full w-[88%]"></div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl space-y-4 border border-white/10 transition-all hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-night-violet/20 flex items-center justify-center text-night-violet border border-night-violet/40">
+                        <i data-lucide="palette" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Digital Visual Art</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Pengolahan efek Canvas interaktif, animasi CSS halus, serta tata visual bertema starlight.</p>
+                    <div class="w-full bg-white/10 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-night-violet h-full w-[85%]"></div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl space-y-4 border border-white/10 transition-all hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-rose-500/20 flex items-center justify-center text-rose-400 border border-rose-500/40">
+                        <i data-lucide="feather" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Digital Storytelling</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed">Menyusun naskah dan penyampaian pesan unik untuk memperkuat identitas merek atau portofolio.</p>
+                    <div class="w-full bg-white/10 rounded-full h-1.5 overflow-hidden">
+                        <div class="bg-rose-400 h-full w-[90%]"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Showcase / Portofolio Gallery -->
+        <section id="projects" class="space-y-8 pt-8">
+            <div class="text-center max-w-2xl mx-auto space-y-3">
+                <span class="text-night-accent text-xs font-semibold uppercase tracking-widest">Galeri Karya Pilihan</span>
+                <h2 class="text-3xl font-serif font-bold text-white">Showcase Portofolio</h2>
+                <p class="text-slate-400 text-sm">Klik pada kartu proyek untuk membuka lightbox rincian lengkap.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-3">
+                <button class="filter-btn active px-5 py-2 rounded-full glass-card text-xs font-semibold text-white border-night-accent" data-filter="all">Semua Karya</button>
+                <button class="filter-btn px-5 py-2 rounded-full glass-card text-xs font-semibold text-slate-400 hover:text-white" data-filter="webapp">Web App</button>
+                <button class="filter-btn px-5 py-2 rounded-full glass-card text-xs font-semibold text-slate-400 hover:text-white" data-filter="uiux">UI/UX Design</button>
+                <button class="filter-btn px-5 py-2 rounded-full glass-card text-xs font-semibold text-slate-400 hover:text-white" data-filter="visual">Karya Visual</button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Project Card 1 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden cursor-pointer group border border-white/10" data-category="webapp" onclick="openModal(1)">
+                    <div class="h-48 bg-gradient-to-br from-indigo-950 via-purple-950 to-night-bg p-6 flex flex-col justify-between relative group-hover:scale-105 transition duration-500">
+                        <div class="flex justify-between items-center text-xs font-mono text-night-accent">
+                            <span>Web App</span>
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="w-10 h-10 rounded-full bg-night-accent/20 border border-night-accent/40 flex items-center justify-center text-night-accent">
+                                <i data-lucide="moon" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="text-lg font-serif font-bold text-white">Starlight Audio Ambient</h4>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-base font-bold text-white group-hover:text-night-accent transition-colors">Starlight Audio Ambient App</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed line-clamp-2">Aplikasi audio pereda stres bertema langit malam dengan efek instrumen ambient interaktif.</p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300">JavaScript</span>
+                            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300">Web Audio API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden cursor-pointer group border border-white/10" data-category="uiux" onclick="openModal(2)">
+                    <div class="h-48 bg-gradient-to-br from-slate-900 via-indigo-950 to-night-bg p-6 flex flex-col justify-between relative group-hover:scale-105 transition duration-500">
+                        <div class="flex justify-between items-center text-xs font-mono text-night-cyan">
+                            <span>UI/UX Design</span>
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="w-10 h-10 rounded-full bg-night-cyan/20 border border-night-cyan/40 flex items-center justify-center text-night-cyan">
+                                <i data-lucide="layers" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="text-lg font-serif font-bold text-white">Celestial Glass UI Kit</h4>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-base font-bold text-white group-hover:text-night-cyan transition-colors">Celestial Glass UI System</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed line-clamp-2">Sistem desain antarmuka tema gelap transparan dengan efek cahaya moonlight dan magenta glowing.</p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300">Figma</span>
+                            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300">Design System</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="project-card glass-card rounded-3xl overflow-hidden cursor-pointer group border border-white/10" data-category="visual" onclick="openModal(3)">
+                    <div class="h-48 bg-gradient-to-br from-rose-950 via-purple-950 to-night-bg p-6 flex flex-col justify-between relative group-hover:scale-105 transition duration-500">
+                        <div class="flex justify-between items-center text-xs font-mono text-night-violet">
+                            <span>Karya Visual</span>
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="w-10 h-10 rounded-full bg-night-violet/20 border border-night-violet/40 flex items-center justify-center text-night-violet">
+                                <i data-lucide="sparkles" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="text-lg font-serif font-bold text-white">Constellation Generative Art</h4>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-base font-bold text-white group-hover:text-night-violet transition-colors">Constellation Generative Art</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed line-clamp-2">Eksperimen seni Canvas interaktif yang membentuk rasi bintang berdasarkan gerakan kursor pengguna.</p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300">HTML5 Canvas</span>
+                            <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-white/5 text-slate-300">Math Art</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Guestbook / Interactive Comments ("Papan Pesan Langit Malam") -->
+        <section id="guestbook" class="space-y-8 pt-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-10 border border-night-accent/30 shadow-glow-accent space-y-8">
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+                    <div>
+                        <span class="text-night-accent text-xs font-semibold uppercase tracking-widest">MySpace Style Guestbook</span>
+                        <h2 class="text-2xl sm:text-3xl font-serif font-bold text-white flex items-center gap-2 mt-1">
+                            <i data-lucide="message-square" class="w-6 h-6 text-night-accent"></i>
+                            <span>Papan Pesan Langit Malam</span>
+                        </h2>
+                    </div>
+                    <span class="text-xs text-slate-400 font-mono">Tinggalkan Jejak & Pesan Anda</span>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    
+                    <!-- Comment Input Form -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <h3 class="text-sm font-bold text-white">Tulis Pesan Baru</h3>
+                        <form id="guestbook-form" class="space-y-4">
+                            <div>
+                                <label for="gb-name" class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1">Nama / Inisial</label>
+                                <input type="text" id="gb-name" required placeholder="Nama Anda" class="w-full px-4 py-3 rounded-xl bg-night-bg/90 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-night-accent transition">
+                            </div>
+                            <div>
+                                <label for="gb-message" class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1">Pesan</label>
+                                <textarea id="gb-message" rows="3" required placeholder="Bagikan kesan Anda..." class="w-full px-4 py-3 rounded-xl bg-night-bg/90 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-night-accent transition resize-none"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-night-accent via-night-violet to-night-cyan text-white text-xs font-semibold uppercase tracking-wider shadow-glow-accent hover:opacity-95 transition flex items-center justify-center gap-2">
+                                <i data-lucide="send" class="w-4 h-4"></i>
+                                <span>Kirim ke Guestbook</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Persistent Session Comments Feed -->
+                    <div class="lg:col-span-7 space-y-4">
+                        <h3 class="text-sm font-bold text-white">Pesan Pengunjung Terbaru</h3>
+                        <div id="comments-feed" class="space-y-3 max-h-80 overflow-y-auto pr-2">
+                            
+                            <!-- Initial Sample Comment 1 -->
+                            <div class="glass-card p-4 rounded-2xl border border-white/5 space-y-2">
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="font-bold text-night-accent flex items-center gap-1.5">
+                                        <i data-lucide="user" class="w-3.5 h-3.5"></i> Maya Starlight
+                                    </span>
+                                    <span class="text-[10px] text-slate-400 font-mono">22 Nov 2026 • 19:40</span>
+                                </div>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    "Website yang sangat syahdu! Musik dan latar belakang bintangnya benar-benar menggambarkan tema Love Unseen Beneath the Clear Night Sky."
+                                </p>
+                            </div>
+
+                            <!-- Initial Sample Comment 2 -->
+                            <div class="glass-card p-4 rounded-2xl border border-white/5 space-y-2">
+                                <div class="flex items-center justify-between text-xs">
+                                    <span class="font-bold text-night-cyan flex items-center gap-1.5">
+                                        <i data-lucide="user" class="w-3.5 h-3.5"></i> Daniel R.
+                                    </span>
+                                    <span class="text-[10px] text-slate-400 font-mono">22 Nov 2026 • 18:15</span>
+                                </div>
+                                <p class="text-xs text-slate-300 leading-relaxed">
+                                    "Suka banget sama nuansa MySpace retro yang dikemas dalam desain modern transparan ini. Karya luar biasa!"
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form ("Kirim Pesan Rahasia") -->
+        <section id="contact" class="space-y-8 pt-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-10 border border-white/10 max-w-4xl mx-auto space-y-8">
+                
+                <div class="text-center space-y-2">
+                    <span class="text-night-accent text-xs font-semibold uppercase tracking-widest">Koneksi & Kolaborasi</span>
+                    <h2 class="text-3xl font-serif font-bold text-white">Kirim Pesan Rahasia</h2>
+                    <p class="text-slate-400 text-sm">Punya gagasan proyek atau pertanyaan? Tuliskan pesan Anda di bawah ini.</p>
+                </div>
+
+                <form id="contact-form" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label for="contact-name" class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1">Nama Lengkap</label>
+                            <input type="text" id="contact-name" required placeholder="Nama Anda" class="w-full px-4 py-3 rounded-xl bg-night-bg/90 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-night-accent transition">
+                        </div>
+                        <div>
+                            <label for="contact-email" class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1">Email</label>
+                            <input type="email" id="contact-email" required placeholder="nama@email.com" class="w-full px-4 py-3 rounded-xl bg-night-bg/90 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-night-accent transition">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="contact-message" class="block text-xs font-medium text-slate-300 uppercase tracking-wider mb-1">Pesan Rahasia</label>
+                        <textarea id="contact-message" rows="4" required placeholder="Tuliskan pesan atau detail proyek Anda..." class="w-full px-4 py-3 rounded-xl bg-night-bg/90 border border-white/10 text-white placeholder-slate-500 text-xs focus:outline-none focus:border-night-accent transition resize-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-night-accent via-night-violet to-night-cyan text-white text-xs font-semibold uppercase tracking-wider shadow-glow-accent hover:opacity-95 transition flex items-center justify-center gap-2">
+                        <i data-lucide="mail" class="w-4 h-4"></i>
+                        <span>Kirim Pesan Malam</span>
+                    </button>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-10 border-t border-white/5 relative z-10 text-center text-xs text-slate-500 space-y-3">
+        <p class="font-serif text-slate-300 text-sm">Love Unseen Beneath the Clear Night Sky</p>
+        <p>© 2026 Portofolio Digital. Dibuat dengan dedikasi & keheningan malam.</p>
+    </footer>
+
+    <!-- Lightbox Modal Project Details -->
+    <div id="project-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+        <div class="glass-card max-w-xl w-full rounded-3xl p-6 sm:p-8 space-y-6 border border-white/20 relative animate-in fade-in duration-300">
+            <button onclick="closeModal()" class="absolute top-6 right-6 p-2 text-slate-400 hover:text-white rounded-full bg-white/5">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="modal-content" class="space-y-4">
+                <!-- Dynamic Modal Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Notification Toast -->
+    <div id="toast" class="fixed bottom-8 right-8 z-50 hidden glass-card p-4 rounded-2xl border border-night-accent/40 shadow-glow-accent flex items-center gap-3 text-sm text-white">
+        <i data-lucide="check-circle-2" class="w-5 h-5 text-night-accent"></i>
+        <span id="toast-message">Pesan Anda berhasil terkirim!</span>
+    </div>
+
+    <!-- JavaScript Engine -->
+    <script>
+        lucide.createIcons();
+
+        // Mobile Nav Menu
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Simulated Music Player Controls
+        let isPlaying = false;
+        const playBtn = document.getElementById('play-pause-btn');
+        const playIcon = document.getElementById('play-icon');
+        const progressBar = document.getElementById('progress-bar');
+        const currentTimeEl = document.getElementById('current-time');
+        let currentSeconds = 75;
+
+        playBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                playIcon.setAttribute('data-lucide', 'pause');
+            } else {
+                playIcon.setAttribute('data-lucide', 'play');
+            }
+            lucide.createIcons();
+        });
+
+        setInterval(() => {
+            if (isPlaying) {
+                currentSeconds = (currentSeconds + 1) % 225;
+                const mins = Math.floor(currentSeconds / 60).toString().padStart(2, '0');
+                const secs = (currentSeconds % 60).toString().padStart(2, '0');
+                currentTimeEl.textContent = `${mins}:${secs}`;
+                progressBar.style.width = `${(currentSeconds / 225) * 100}%`;
+            }
+        }, 1000);
+
+        // Project Data & Modal System
+        const projects = {
+            1: {
+                title: "Starlight Audio Ambient App",
+                category: "Web App",
+                description: "Aplikasi lanskap audio relaksasi malam yang memadukan generator frekuensi suara dan partikel canvas berbintang.",
+                tech: ["JavaScript", "Web Audio API", "Tailwind CSS"],
+                detail: "Proyek ini dirancang untuk menciptakan suasana kerja yang fokus dan tenang di malam hari dengan visualisasi partikel bercahaya."
+            },
+            2: {
+                title: "Celestial Glass UI System",
+                category: "UI/UX Design",
+                description: "Sistem komponen antarmuka bertema gelap transparan dengan sentuhan moonlight silver dan magenta glow.",
+                tech: ["Figma", "Design System", "UI Kit"],
+                detail: "Mencakup lebih dari 40+ komponen terstandar untuk mempercepat alur kerja pembuatan antarmuka web modern bertema malam."
+            },
+            3: {
+                title: "Constellation Generative Art",
+                category: "Karya Visual",
+                description: "Eksperimen seni Canvas interaktif yang membentuk rasi bintang unik setiap kali kursor digerakkan.",
+                tech: ["HTML5 Canvas", "Math Art", "JS Animation"],
+                detail: "Menampilkan kalkulasi matematika spasial 2D untuk menghubungkan partikel-partikel cahaya dengan garis rasi yang lembut."
+            }
+        };
+
+        function openModal(id) {
+            const data = projects[id];
+            if (!data) return;
+
+            const modalContent = document.getElementById('modal-content');
+            modalContent.innerHTML = `
+                <span class="text-xs font-mono px-3 py-1 rounded-full bg-night-accent/20 text-night-accent border border-night-accent/30 inline-block">${data.category}</span>
+                <h3 class="text-2xl font-serif font-bold text-white">${data.title}</h3>
+                <p class="text-slate-300 text-sm leading-relaxed">${data.description}</p>
+                <div class="glass-card p-4 rounded-2xl border border-white/10 text-xs text-slate-400 space-y-1">
+                    <strong class="text-white block">Detail Karya:</strong>
+                    <p>${data.detail}</p>
+                </div>
+                <div class="flex flex-wrap gap-2 pt-2">
+                    ${data.tech.map(t => `<span class="text-xs px-3 py-1 rounded-full bg-white/5 text-slate-300">${t}</span>`).join('')}
+                </div>
+            `;
+            document.getElementById('project-modal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+
+        // Project Filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'border-night-accent', 'text-white');
+                    b.classList.add('text-slate-400');
+                });
+                btn.classList.add('active', 'border-night-accent', 'text-white');
+                btn.classList.remove('text-slate-400');
+
+                const filter = btn.getAttribute('data-filter');
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Guestbook persistent session comments
+        document.getElementById('guestbook-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameInput = document.getElementById('gb-name');
+            const messageInput = document.getElementById('gb-message');
+
+            if (!nameInput.value.trim() || !messageInput.value.trim()) return;
+
+            const commentsFeed = document.getElementById('comments-feed');
+            const newComment = document.createElement('div');
+            newComment.className = 'glass-card p-4 rounded-2xl border border-night-accent/30 space-y-2 animate-in fade-in duration-300';
+            
+            const now = new Date();
+            const timeStr = `${now.getDate()} Nov ${now.getFullYear()} • ${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+            newComment.innerHTML = `
+                <div class="flex items-center justify-between text-xs">
+                    <span class="font-bold text-night-accent flex items-center gap-1.5">
+                        <i data-lucide="user" class="w-3.5 h-3.5"></i> ${escapeHtml(nameInput.value)}
+                    </span>
+                    <span class="text-[10px] text-slate-400 font-mono">${timeStr}</span>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">${escapeHtml(messageInput.value)}</p>
+            `;
+
+            commentsFeed.prepend(newComment);
+            lucide.createIcons();
+
+            nameInput.value = '';
+            messageInput.value = '';
+            showToast('Pesan berhasil ditambahkan ke Guestbook!');
+        });
+
+        // Contact Form
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('contact-form').reset();
+            showToast('Pesan rahasia Anda berhasil terkirim!');
+        });
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 4000);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.innerText = text;
+            return div.innerHTML;
+        }
+
+        // Starfield Canvas Background (Stars & Meteors)
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+        let meteors = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
+
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < 200; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5 + 0.3,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.015 + 0.005,
+                    color: Math.random() > 0.4 ? '#e2e8f0' : (Math.random() > 0.5 ? '#ec4899' : '#38bdf8')
+                });
+            }
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Subtle Glow Background
+            const bgGradient = ctx.createRadialGradient(canvas.width * 0.7, canvas.height * 0.3, 20, canvas.width * 0.7, canvas.height * 0.3, 450);
+            bgGradient.addColorStop(0, 'rgba(236, 72, 153, 0.06)');
+            bgGradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Render Stars
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+
+                ctx.save();
+                ctx.globalAlpha = Math.max(0.1, Math.min(1, star.alpha));
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = star.color;
+                ctx.shadowBlur = star.radius * 4;
+                ctx.shadowColor = star.color;
+                ctx.fill();
+                ctx.restore();
+            });
+
+            // Random Meteors
+            if (Math.random() < 0.012) {
+                meteors.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * (canvas.height / 2),
+                    length: Math.random() * 90 + 40,
+                    speed: Math.random() * 7 + 4,
+                    alpha: 1
+                });
+            }
+
+            for (let i = meteors.length - 1; i >= 0; i--) {
+                const m = meteors[i];
+                ctx.save();
+                ctx.strokeStyle = `rgba(236, 72, 153, ${m.alpha})`;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(m.x, m.y);
+                ctx.lineTo(m.x - m.length, m.y + m.length);
+                ctx.stroke();
+                ctx.restore();
+
+                m.x += m.speed;
+                m.y += m.speed;
+                m.alpha -= 0.02;
+
+                if (m.alpha <= 0) meteors.splice(i, 1);
+            }
+
+            requestAnimationFrame(animateStars);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        window.onload = () => {
+            resizeCanvas();
+            animateStars();
+        };
+    </script>
+</body>
+</html>
